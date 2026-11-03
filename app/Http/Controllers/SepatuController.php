@@ -12,7 +12,7 @@ class SepatuController extends Controller
      */
     public function index()
     {
-        return view('sepatu.index',[
+        return view('sepatu.index', [
             'title' => 'sepatu',
             'sepatus' => Sepatu::latest()->get()
 
@@ -24,7 +24,7 @@ class SepatuController extends Controller
      */
     public function create()
     {
-        return view('sepatu.create',[
+        return view('sepatu.create', [
             'title' => 'Tambah Data Sepatu'
         ]);
     }
@@ -34,7 +34,28 @@ class SepatuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama'       => 'required|string',
+            'brand'      => 'required|string',
+            'ukuran'     => 'required|integer|min:20|max:60',
+            'warna'      => 'required|string',
+            'harga_beli' => 'required|integer|min:0',
+        ], [
+            'nama.required'       => 'Nama sepatu wajib diisi.',
+            'brand.required'      => 'Brand wajib diisi.',
+            'ukuran.required'     => 'Ukuran wajib diisi.',
+            'ukuran.integer'      => 'Ukuran harus berupa angka bulat.',
+            'ukuran.min'          => 'Ukuran minimal 20.',
+            'ukuran.max'          => 'Ukuran maksimal 60.',
+            'warna.required'      => 'Warna wajib diisi.',
+            'harga_beli.required' => 'Harga beli wajib diisi.',
+            'harga_beli.integer'  => 'Harga beli harus berupa angka bulat.',
+            'harga_beli.min'      => 'Harga beli tidak boleh kurang dari 0.',
+        ]);
+
+        Sepatu::create($validated);
+
+        return to_route('sepatu.index')->with('success', 'Sepatu berhasil ditambahkan.');
     }
 
     /**
@@ -42,9 +63,9 @@ class SepatuController extends Controller
      */
     public function show(sepatu $sepatu)
     {
-        return view('sepatu.show',[
+        return view('sepatu.show', [
             'title' => 'Detail Sepatu',
-            'sepatu' =>$sepatu
+            'sepatu' => $sepatu
 
         ]);
     }
@@ -54,7 +75,7 @@ class SepatuController extends Controller
      */
     public function edit(string $id)
     {
-        return view('sepatu.edit',[
+        return view('sepatu.edit', [
             'title' => 'Edit Data Sepatu'
 
         ]);

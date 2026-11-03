@@ -114,8 +114,10 @@ class SepatuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Sepatu $sepatu)
     {
-        //
+        $sepatu->delete();
+
+        return to_route('sepatu.index')->withSuccess('Data Berhasil Dihapus');
     }
 }

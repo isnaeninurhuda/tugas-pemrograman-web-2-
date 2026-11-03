@@ -35,6 +35,14 @@
                     <td>
                         <a class="btn btn-warning btn-3 btn-sm" href=" {{ route('sepatu.edit', $sepatu->id) }}">edit</a>
                         <a class="btn btn-info btn-3 btn-sm" href=" {{ route('sepatu.show', $sepatu->id) }}">show</a>
+
+                        <form method="POST" action="{{ route('sepatu.destroy', $sepatu) }}" class="d-inline">
+                            @csrf
+                            @method('delete')
+
+                            <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/sepatu', [SepatuController::class, 'index'])->name('sepatu.index');
 Route::get('/sepatu/create', [SepatuController::class, 'create'])->name('sepatu.create');
+Route::get('/sepatu/{sepatu}', [SepatuController::class, 'show'])->name('sepatu.show');
 Route::post('/sepatu', [SepatuController::class, 'store'])->name('sepatu.store');
 Route::get('/sepatu/{sepatu}/edit', [SepatuController::class, 'edit'])->name('sepatu.edit');
 Route::put('/sepatu/{sepatu}/edit', [SepatuController::class, 'update'])->name('sepatu.update');

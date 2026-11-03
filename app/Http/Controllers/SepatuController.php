@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sepatu;
 use Illuminate\Http\Request;
 
 class SepatuController extends Controller
@@ -12,7 +13,8 @@ class SepatuController extends Controller
     public function index()
     {
         return view('sepatu.index',[
-            'title' => 'sepatu'
+            'title' => 'sepatu',
+            'sepatus' => Sepatu::latest()->get()
 
         ]);
     }
@@ -24,7 +26,6 @@ class SepatuController extends Controller
     {
         return view('sepatu.create',[
             'title' => 'Tambah Data Sepatu'
-
         ]);
     }
 
@@ -39,10 +40,11 @@ class SepatuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(sepatu $sepatu)
     {
         return view('sepatu.show',[
-            'title' => 'Detail Sepatu'
+            'title' => 'Detail Sepatu',
+            'sepatu' =>$sepatu
 
         ]);
     }

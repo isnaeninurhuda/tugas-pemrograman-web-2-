@@ -4,6 +4,33 @@
         {{ $title }}
     </x-slot:title>
 
-    <a class="btn btn-primary my-3 py-2" href=" {{ route('sepatu.create') }}
-">Tambah Data Sepatu</a>
+    <a class="btn btn-primary my-3 py-2" href="{{ route('sepatu.create') }}">Tambah Data Sepatu</a>
+
+    <table class="table  table-bordered border-dark table-hover">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Brand</th>
+                <th>Ukuran</th>
+                <th>Warna</th>
+                <th>Harga_beli</th>
+                <th>Aksi</th>
+        </thead>
+        <tbody>
+            @foreach ($sepatus as $sepatu)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $sepatu->nama }}</td>
+                    <td>{{ $sepatu->brand }}</td>
+                    <td>{{ $sepatu->ukuran }}</td>
+                    <td>{{ $sepatu->warna }}</td>
+                    <td>Rp.{{ $sepatu->harga_beli }}</td>
+                    <td><a class="btn btn-info btn-3 btn-sm" href=" {{ route('sepatu.show', $sepatu->id) }} 
+">show</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </x-app>

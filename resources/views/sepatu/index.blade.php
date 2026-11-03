@@ -32,8 +32,9 @@
                     <td>{{ $sepatu->ukuran }}</td>
                     <td>{{ $sepatu->warna }}</td>
                     <td>Rp.{{ $sepatu->harga_beli }}</td>
-                    <td><a class="btn btn-info btn-3 btn-sm" href=" {{ route('sepatu.show', $sepatu->id) }} 
-">show</a>
+                    <td>
+                        <a class="btn btn-warning btn-3 btn-sm" href=" {{ route('sepatu.edit', $sepatu->id) }}">edit</a>
+                        <a class="btn btn-info btn-3 btn-sm" href=" {{ route('sepatu.show', $sepatu->id) }}">show</a>
                     </td>
                 </tr>
             @endforeach

@@ -73,10 +73,11 @@ class SepatuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Sepatu $sepatu)
     {
         return view('sepatu.edit', [
-            'title' => 'Edit Data Sepatu'
+            'title' => 'Edit Data Sepatu',
+            'sepatu' => $sepatu
 
         ]);
     }
@@ -84,9 +85,30 @@ class SepatuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Sepatu $sepatu)
     {
-        //
+        $validated = $request->validate([
+            'nama'       => 'required|string',
+            'brand'      => 'required|string',
+            'ukuran'     => 'required|integer|min:20|max:60',
+            'warna'      => 'required|string',
+            'harga_beli' => 'required|integer|min:0',
+        ], [
+            'nama.required'       => 'Nama sepatu wajib diisi.',
+            'brand.required'      => 'Brand wajib diisi.',
+            'ukuran.required'     => 'Ukuran wajib diisi.',
+            'ukuran.integer'      => 'Ukuran harus berupa angka bulat.',
+            'ukuran.min'          => 'Ukuran minimal 20.',
+            'ukuran.max'          => 'Ukuran maksimal 60.',
+            'warna.required'      => 'Warna wajib diisi.',
+            'harga_beli.required' => 'Harga beli wajib diisi.',
+            'harga_beli.integer'  => 'Harga beli harus berupa angka bulat.',
+            'harga_beli.min'      => 'Harga beli tidak boleh kurang dari 0.',
+        ]);
+
+        $sepatu->update($validated);
+
+        return to_route('sepatu.index')->with('success', 'Sepatu berhasil diubah.');
     }
 
     /**
